@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Demo Instituciones</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+  <h1>Instituciones Educativas</h1>
+
+  <div id="contenido"></div>
+
+  <br>
+  <button id="btn-obtener">Obtener información</button>
+  <button id="btn-limpiar">Limpiar información</button>
+
+  <script>
+    var URL = "https://raw.githubusercontent.com/taw-desarrollo-plataformas-web/oers/refs/heads/main/data_instituciones.json";
+
+    $("#btn-obtener").click(function () {
+      $.getJSON(URL, function (data) {
+        var html = "";
+        $.each(data, function (i, inst) {
+          html += "<p>";
+          html += "<b>AMIE:</b> " + inst.AMIE + " ";
+          html += "<b>Nombre:</b> " + inst["Nombre-Educativa"] + " ";
+          html += "<b>Provincia:</b> " + inst.Provincia + " ";
+          html += "<b>Cantón:</b> " + inst.Canton + " ";
+          html += "<b>Sostenimiento:</b> " + inst.Sostenimiento + " ";
+          html += "<b>Estado:</b> " + inst.Estado;
+          html += "</p>";
+        });
+        $("#contenido").html(html);
+      });
+    });
+
+    $("#btn-limpiar").click(function () {
+      $("#contenido").html("");
+    });
+  </script>
+
+</body>
+</html>
